@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="bookstore")
+@CrossOrigin
 public class BookController {
     @Autowired
     private IBookService bookService;
@@ -76,6 +77,27 @@ public class BookController {
     public ResponseEntity<ResponseDTO> getBooksByOrderByPriceDesc(){
         List<Book> books = bookService.getBooksByOrderByPriceDesc();
         ResponseDTO booksResponseDTO = new ResponseDTO("Get All Books DESC ORDER Successfully", books);
+        return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = {"", "/","/getByOrderByPriceAsc"})
+    public ResponseEntity<ResponseDTO> getBooksByOrderByIdAsc(){
+        List<Book> books = bookService.getBooksByOrderByIdAsc();
+        ResponseDTO booksResponseDTO = new ResponseDTO("Get All Books ASC ORDER Successfully", books);
+        return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
+    }
+
+    // SORTING
+    @GetMapping(value = {"", "/","/getByOrderByPriceDesc"})
+    public ResponseEntity<ResponseDTO> getBooksByOrderByIdDesc(){
+        List<Book> books = bookService.getBooksByOrderByIdDesc();
+        ResponseDTO booksResponseDTO = new ResponseDTO("Get All Books DESC ORDER Successfully", books);
+        return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
+    }
+    @PostMapping(value = {"/getBooksByAuthor"})
+    public ResponseEntity<ResponseDTO> getBooksByAuthor(@RequestBody BookDTO  bookDTO){
+        List<Book> booksByAuthor = bookService.getBooksByAuthor(bookDTO.getAuthor());
+        ResponseDTO booksResponseDTO = new ResponseDTO("Get all books by name successfully", booksByAuthor);
         return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
     }
 }
