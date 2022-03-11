@@ -18,15 +18,15 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long OrderId;
+    private Long order_Id;
     @NotNull
     private String orderDate;
     @NotNull
     private Long price;
     @NotNull
-    private Long Quantity;
+    private Long quantity;
     @Pattern(regexp = "[A-Za-z]{1}[a-zA-Z\\s]{2,}$", message = "Person first name Invalid")
-    private String Address;
+    private String address;
 
     @ManyToOne
     private User userOrder;

@@ -25,7 +25,7 @@ public class Book {
 
     private String description;
 
-    private String logoMultipart;
+    private String bookLogo;
 
     private Long price;
 

@@ -25,13 +25,6 @@ public class OrderController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-//    @GetMapping( "/get-all-order-by-orderDTO")
-//    public ResponseEntity<ResponseDTO> getUserDataById(@RequestBody OrderDTO orderDTO){
-//        List<Order> orderList = orderServiceImpl.getAllOrders(orderDTO);
-//        ResponseDTO responseDTO = new ResponseDTO("Get Call Successful at ORDER DTO: " , orderList);
-//        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-//    }
-
     @GetMapping( "/get-All-Orders-For-User")
     public ResponseEntity<ResponseDTO> getAllOrdersForUser(@RequestParam String token){
         List<Order> userOrderList = orderServiceImpl.getAllOrdersForUser(token);

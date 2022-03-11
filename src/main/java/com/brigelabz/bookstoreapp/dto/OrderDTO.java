@@ -15,10 +15,10 @@ public class OrderDTO {
     private Long price;
 
     @NotNull
-    private Long Quantity;
+    private Long quantity;
 
     @Pattern(regexp = "[A-Za-z]{1}[a-zA-Z\\s]{2,}$", message = "Person first name Invalid")
-    private String Address;
+    private String address;
 
     @NotNull
     private boolean cancel;
