@@ -29,7 +29,7 @@ public class BookController {
 
     @GetMapping("/{bookId}")
     public ResponseEntity<ResponseDTO> getBookById(@PathVariable("bookId") long bookId){
-        Book book = bookService.getBookByID(bookId);
+        Book book = bookService.getBookByBookId(bookId);
         ResponseDTO booksResponseDTO = new ResponseDTO("Found book Successfully having id: "
                 +bookId, book);
         return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
@@ -82,7 +82,7 @@ public class BookController {
 
     @GetMapping(value = {"", "/","/getByOrderByPriceAsc"})
     public ResponseEntity<ResponseDTO> getBooksByOrderByIdAsc(){
-        List<Book> books = bookService.getBooksByOrderByIdAsc();
+        List<Book> books = bookService.getBooksByOrderByBookIdAsc();
         ResponseDTO booksResponseDTO = new ResponseDTO("Get All Books ASC ORDER Successfully", books);
         return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
     }
@@ -90,7 +90,7 @@ public class BookController {
     // SORTING
     @GetMapping(value = {"", "/","/getByOrderByPriceDesc"})
     public ResponseEntity<ResponseDTO> getBooksByOrderByIdDesc(){
-        List<Book> books = bookService.getBooksByOrderByIdDesc();
+        List<Book> books = bookService.getBooksByOrderByBookIdDesc();
         ResponseDTO booksResponseDTO = new ResponseDTO("Get All Books DESC ORDER Successfully", books);
         return new ResponseEntity<ResponseDTO>(booksResponseDTO, HttpStatus.OK);
     }

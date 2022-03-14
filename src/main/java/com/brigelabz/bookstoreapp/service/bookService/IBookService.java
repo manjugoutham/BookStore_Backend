@@ -10,7 +10,7 @@ public interface IBookService {
 
 
     List<Book> getAllBook();
-    Book getBookByID(Long bookId);
+    Book getBookByBookId(Long bookId);
     Book addBook(BookDTO bookDTO);
     Book updateBook(Long bookID, BookDTO bookDTO);
     void deleteBook(String token,Long bookId);
@@ -20,8 +20,8 @@ public interface IBookService {
     List<Book> getBooksByOrderByPriceAsc();
     List<Book> getBooksByOrderByPriceDesc();
 
-    List<Book> getBooksByOrderByIdAsc();
-    List<Book> getBooksByOrderByIdDesc();
+    List<Book> getBooksByOrderByBookIdAsc();
+    List<Book> getBooksByOrderByBookIdDesc();
 
     List<Book> getBooksByAuthor(@Pattern(regexp = "[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Person first name Invalid") String author);
 

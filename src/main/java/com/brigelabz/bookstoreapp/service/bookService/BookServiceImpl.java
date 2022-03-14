@@ -27,7 +27,7 @@ public class BookServiceImpl implements IBookService{
     }
 
     @Override
-    public Book getBookByID(Long bookId) {
+    public Book getBookByBookId(Long bookId) {
         return bookRepository.findById(bookId).get();
     }
 
@@ -41,7 +41,7 @@ public class BookServiceImpl implements IBookService{
 
     @Override
     public Book updateBook(Long bookId, BookDTO bookDTO) {
-        Book book = this.getBookByID(bookId);
+        Book book = this.getBookByBookId(bookId);
         modelMapper.map(bookDTO, book);
         return bookRepository.save(book);
     }
@@ -52,7 +52,7 @@ public class BookServiceImpl implements IBookService{
         String actualSubject = UserLoginServiceImpl.findSubByDecodeToken(UserLoginServiceImpl.TOKEN);
         System.out.println(actualSubject+ "    "+ receivedSubject);
         if(UserLoginServiceImpl.TOKEN.equals(token)) {
-            Book book = this.getBookByID(bookId);
+            Book book = this.getBookByBookId(bookId);
             bookRepository.delete(book);
         }
         else
@@ -89,14 +89,15 @@ public class BookServiceImpl implements IBookService{
     }
 
     @Override
-    public List<Book> getBooksByOrderByIdAsc() {
-        return bookRepository.getBooksByOrderByIdAsc();
+    public List<Book> getBooksByOrderByBookIdAsc() {
+        return bookRepository.getBooksByOrderByBookIdAsc();
     }
 
     @Override
-    public List<Book> getBooksByOrderByIdDesc() {
-        return bookRepository.getBooksByOrderByIdDesc();
+    public List<Book> getBooksByOrderByBookIdDesc() {
+        return bookRepository.getBooksByOrderByBookIdDesc();
     }
+
     @Override
     public List<Book> getBooksByAuthor(String author) {
         return bookRepository.getBooksByAuthor(author);
