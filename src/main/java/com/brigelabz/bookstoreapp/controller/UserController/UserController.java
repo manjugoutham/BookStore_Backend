@@ -26,7 +26,7 @@ public class UserController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping( "/getBYId/{userId}")
+    @GetMapping( "/getById/{userId}")
     public ResponseEntity<ResponseDTO> getUserDataById(@PathVariable("personId") long userId){
         User userById = userServiceImpl.getUserById(userId);
         ResponseDTO responseDTO = new ResponseDTO("Get Call Successful at ID: " + userId, userById);
@@ -38,6 +38,7 @@ public class UserController {
         User user = userServiceImpl.addUser(userDTO);
         ResponseDTO responseDTO = new ResponseDTO("Create Person Data for: " ,user);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
     }
 
     @PutMapping("/update/{userId}")

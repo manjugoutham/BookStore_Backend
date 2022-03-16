@@ -69,7 +69,7 @@ public class UserLoginServiceImpl implements IUserLoginService{
                   .withIssuer("http://localhost:8080/authentication/login")
 
                 .withSubject(principal.toString())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)).sign(algorithm);
+                .withExpiresAt(new Date(System.currentTimeMillis() + 20 * 60 * 10000)).sign(algorithm);
         return generated_token;
     }
 

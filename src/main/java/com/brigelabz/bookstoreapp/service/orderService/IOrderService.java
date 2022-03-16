@@ -7,10 +7,13 @@ import java.util.List;
 
 public interface IOrderService {
 
-    Order placeOrder(String token);
+    //Order placeOrder(String token);
+
+    Order placeOrder(String token, OrderDTO orderDTO);
+
     Boolean cancelOrder(String token, Long orderId);
 //    List<Order> getAllOrders(OrderDTO orderDTO);
     List<Order> getAllOrders();
-    List<Order> getAllOrdersForUser(String token);
+    List<Order> getAllOrdersByUserId(String token);
 
 }

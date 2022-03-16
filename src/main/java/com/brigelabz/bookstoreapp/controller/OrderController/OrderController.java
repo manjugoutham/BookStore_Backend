@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("order")
+@CrossOrigin
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
     OrderServiceImpl orderServiceImpl;
 
-    @GetMapping(value = {"","/","/get-all-order"})
+    @GetMapping(value = {"","/","/getallorder"})
     public ResponseEntity<ResponseDTO> getAllOrders(){
         List<Order> allOrders = orderServiceImpl.getAllOrders();
         ResponseDTO responseDTO = new ResponseDTO("Get Call Success", allOrders);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping( "/get-All-Orders-For-User")
-    public ResponseEntity<ResponseDTO> getAllOrdersForUser(@RequestParam String token){
-        List<Order> userOrderList = orderServiceImpl.getAllOrdersForUser(token);
+    @GetMapping( "/getAllOrdersForUser/{token}")
+    public ResponseEntity<ResponseDTO> getAllOrdersForUser(@PathVariable String token, OrderDTO orderDTO){
+        List<Order> userOrderList = orderServiceImpl.getAllOrdersByUserId(token);
         ResponseDTO responseDTO = new ResponseDTO("Get Call Successful at ORDER DTO: " , userOrderList);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
@@ -39,9 +40,9 @@ public class OrderController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/place-Order")
-    public ResponseEntity<ResponseDTO> addPersonData(@RequestParam String token){
-        Order placeOrder = orderServiceImpl.placeOrder(token);
+    @PostMapping("/placeOrder")
+    public ResponseEntity<ResponseDTO> addPersonData(@RequestParam String token,@RequestBody OrderDTO orderDTO){
+        Order placeOrder = orderServiceImpl.placeOrder(token,orderDTO);
         ResponseDTO responseDTO = new ResponseDTO("Oder Place successfully : " ,placeOrder);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
