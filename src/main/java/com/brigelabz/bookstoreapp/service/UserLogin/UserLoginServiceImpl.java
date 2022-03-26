@@ -37,20 +37,20 @@ public class UserLoginServiceImpl implements IUserLoginService{
         String userLoginRole = userLogin.getRole();
         // Authenticate TOKEN
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,password);
-//        Authentication authenticate = authenticationManager.authenticate(authenticationToken);// TO be Done
+//        Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         log.info("email : {}",email);
         log.info("password : {}",password);
         log.info("AuthenticationToken : {}",authenticationToken);
-//        log.info("authenticate status or checking : {} ", authenticate); // TO be Done
+//        log.info("authenticate status or checking : {} ", authenticate);
         User encodePasswordByEmail = userRepository.getEncodePasswordByEmail(email);
-//        log.info("encodePassword stored in MySql Database : {}",encodePasswordByEmail); // correct uncomment to look into stored encoded password in Database
-//        log.info("Attempted password is : {}",password); // correct uncomment to look into Attempted password
+//        log.info("encodePassword stored in MySql Database : {}",encodePasswordByEmail);
+//        log.info("Attempted password is : {}",password);
         boolean matches = passwordEncoder.matches(password,encodePasswordByEmail.getPassword());
         if (matches==true){
             log.info("Authentication status for email ID : {}: Verified ",email);
-            Object principal = authenticationToken.getPrincipal(); // subject in token
+            Object principal = authenticationToken.getPrincipal();
             log.info("principal --> {}",principal);
-            String jwtToken = createJWTToken(principal);// JWT TOKEN
+            String jwtToken = createJWTToken(principal);
             log.info("JWT Token is : {}",jwtToken);
             TOKEN = jwtToken;
             System.out.println(TOKEN);
@@ -74,7 +74,7 @@ public class UserLoginServiceImpl implements IUserLoginService{
     }
 
     static Random random = new Random();
-    static long OTP = random.nextInt(999999); // Generating OTP
+    static long OTP = random.nextInt(999999);
 
     @Override
     public Long sendOTPToEmail(String email) {
@@ -92,7 +92,7 @@ public class UserLoginServiceImpl implements IUserLoginService{
             log.info("OTP successfully verified");
             return InputOtp;
         }
-        log.error("OTP not verified, Enter valid OTP (One Time Password)");
+        log.error("OTP not verified, Enter valid OTP");
         throw new BookstoreException("OTP not verified, Enter valid OTP (One Time Password)");
     }
 
@@ -114,7 +114,7 @@ public class UserLoginServiceImpl implements IUserLoginService{
         throw new BookstoreException("Enter the valid email ID");
     }
 
-    private void sendEmail(String subject, String message, String fromEmail, String toEmail) {
+    public static void sendEmail(String subject, String message, String fromEmail, String toEmail) {
         Properties properties = System.getProperties(); // system properties
         System.out.println(properties);
         // set the host properties
@@ -131,10 +131,10 @@ public class UserLoginServiceImpl implements IUserLoginService{
         session.setDebug(true);
         MimeMessage mimeMessage = new MimeMessage(session);
         try {
-            mimeMessage.setFrom(new InternetAddress(fromEmail));// need to change
+            mimeMessage.setFrom(new InternetAddress(fromEmail));
             mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail)); // to email
-            mimeMessage.setSubject(subject); // setting subject
-            mimeMessage.setText(message); // setting message
+            mimeMessage.setSubject(subject);
+            mimeMessage.setText(message);
             Transport.send(mimeMessage);
             log.info("Email sent successFully");
         } catch (MessagingException e) {

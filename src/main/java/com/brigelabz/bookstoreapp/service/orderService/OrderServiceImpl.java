@@ -88,4 +88,22 @@ public class OrderServiceImpl implements IOrderService{
         System.out.println(order);
         return order;
     }
+
+    @Override
+    public User getUserByToken(String token) {
+        String useremail = UserLoginServiceImpl.findSubByDecodeToken(token);
+        User emailIdByEmail = userRepository.getEmailIdByEmail(useremail);
+        return emailIdByEmail;
+    }
+
+    @Override
+    public String sendOrderEmail(String token) {
+        String subject="Order Confirmed";
+        String message = "Order successfully placed";
+        String email = UserLoginServiceImpl.findSubByDecodeToken(token);
+        String toEmail = email;
+        String fromEmail= "goutham.y@bridgelabz.com";
+        UserLoginServiceImpl.sendEmail(subject, message,fromEmail,toEmail);
+        return "Order successfully placed";
+    }
 }

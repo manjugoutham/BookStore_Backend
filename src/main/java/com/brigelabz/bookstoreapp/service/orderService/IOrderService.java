@@ -2,6 +2,7 @@ package com.brigelabz.bookstoreapp.service.orderService;
 
 import com.brigelabz.bookstoreapp.dto.OrderDTO;
 import com.brigelabz.bookstoreapp.entity.Order;
+import com.brigelabz.bookstoreapp.entity.User;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface IOrderService {
     List<Order> getAllOrders();
     List<Order> getAllOrdersByUserId(String token);
 
+    User getUserByToken(String token);
+
+    String sendOrderEmail(String token);
 }

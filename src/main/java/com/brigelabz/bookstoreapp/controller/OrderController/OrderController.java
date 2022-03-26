@@ -3,6 +3,8 @@ package com.brigelabz.bookstoreapp.controller.OrderController;
 import com.brigelabz.bookstoreapp.dto.OrderDTO;
 import com.brigelabz.bookstoreapp.dto.ResponseDTO;
 import com.brigelabz.bookstoreapp.entity.Order;
+import com.brigelabz.bookstoreapp.entity.User;
+import com.brigelabz.bookstoreapp.service.cartService.ICartService;
 import com.brigelabz.bookstoreapp.service.orderService.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,5 +48,20 @@ public class OrderController {
         ResponseDTO responseDTO = new ResponseDTO("Oder Place successfully : " ,placeOrder);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = {"/getUserByToken/{token}"})
+    public ResponseEntity<ResponseDTO> getUserByToken(@PathVariable String token) {
+        User user = orderServiceImpl.getUserByToken(token);
+        ResponseDTO respDTO = new ResponseDTO("Get cartId Call Successfully", user);
+        return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = {"/sendOrderEmail/{token}"})
+    public ResponseEntity<ResponseDTO> sendOrderEmail(@PathVariable String token) {
+        String orderEmail = orderServiceImpl.sendOrderEmail(token);
+          ResponseDTO respDTO = new ResponseDTO("Order confirmation Successfully", orderEmail);
+        return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+    }
+
 
 }

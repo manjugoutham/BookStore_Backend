@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="bookstore")
+@RequestMapping(value="/bookstore")
 @CrossOrigin
 public class BookController {
     @Autowired

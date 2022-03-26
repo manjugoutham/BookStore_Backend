@@ -4,6 +4,7 @@ import com.brigelabz.bookstoreapp.dto.BookDTO;
 import com.brigelabz.bookstoreapp.dto.CartDTO;
 import com.brigelabz.bookstoreapp.entity.Book;
 import com.brigelabz.bookstoreapp.entity.Cart;
+import com.brigelabz.bookstoreapp.entity.User;
 
 import java.util.List;
 
