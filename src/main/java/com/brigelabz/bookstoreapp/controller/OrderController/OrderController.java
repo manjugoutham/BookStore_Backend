@@ -57,7 +57,8 @@ public class OrderController {
     }
 
     @GetMapping(value = {"/sendOrderEmail/{token}"})
-    public ResponseEntity<ResponseDTO> sendOrderEmail(@PathVariable String token) {
+    public ResponseEntity<ResponseDTO> sendOrderEmail(@PathVariable String token)
+    {
         String orderEmail = orderServiceImpl.sendOrderEmail(token);
           ResponseDTO respDTO = new ResponseDTO("Order confirmation Successfully", orderEmail);
         return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);

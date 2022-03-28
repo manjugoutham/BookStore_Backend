@@ -98,7 +98,7 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     public String sendOrderEmail(String token) {
-        String subject="Order Confirmed";
+        String subject="Order Confirmed success";
         String message = "Order successfully placed";
         String email = UserLoginServiceImpl.findSubByDecodeToken(token);
         String toEmail = email;
